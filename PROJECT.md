@@ -82,3 +82,8 @@ La página /soluciones incorpora una portada fotográfica, secciones de cloud, i
 
 La apariencia incluye modos claro y oscuro en el selector Temas. Se recuerda por navegador, independientemente de las seis paletas, y se aplica antes del primer renderizado. Restablecer vuelve a naranja y modo claro.
 
+
+## Publicación estática para servidor propio
+
+Desde esta revisión, npm run build genera dist/index.html y páginas físicas /soluciones/ y /panel/. Se reutilizan imágenes, catálogo, seis paletas y modos de apariencia. El catálogo estático no utiliza ni simula la API de registros. La gestión de empresas y solicitudes se conserva en el entorno local Workers/D1 mediante npm run dev; build:worker y start:worker mantienen la variante anterior. Ver DEPLOYMENT.md para salida dist y Docker/Nginx. El usuario eligió realizar personalmente el despliegue en cd.com.py.
+

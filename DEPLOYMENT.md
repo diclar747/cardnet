@@ -1,38 +1,62 @@
-# Despliegue en cd.com.py
+# Publicar CARDNET en cardnet.cd.com.py
 
-Destino previsto: VPS Linux con Docker. Repositorio: https://github.com/diclar747/cardnet.
+## Configuración de Despliegue Git
 
-## Estado de esta versión
+| Campo | Valor |
+| --- | --- |
+| Repositorio | https://github.com/diclar747/cardnet.git |
+| Rama | main |
+| Directorio del proyecto | raíz del repositorio (.) |
+| Node | 22.13 o superior |
+| Instalación | npm ci --include=dev --include=optional |
+| Compilación | npm run build |
+| Directorio publicado / salida | dist |
+| Documento inicial | index.html |
+| Tipo | Estático |
+| Comando de arranque | Ninguno: servir los archivos de dist |
 
-La presentación, el catálogo, las seis paletas y los modos claro/oscuro están implementados. El panel cuenta con empresas, solicitudes y actividad. Los 37 módulos del catálogo conservan sus estados de desarrollo; no son 37 sistemas operativos terminados.
+**La raíz pública debe ser dist, no la raíz del repositorio ni dist/server.** El index.html de la raíz del código es una plantilla; se publica el generado en dist/index.html. Si existe un solo campo de construcción: `npm ci --include=dev --include=optional && npm run build`.
 
-Esta versión usa Vinext, Cloudflare Workers y D1. No es una aplicación Node/Express convencional ni un sitio PHP. El comando `npm start` ejecuta el Worker construido mediante Wrangler/Miniflare local; es una vista previa, no una receta de producción para un VPS.
+Actualizar desde Git y crear un despliegue del último commit. Cambiar cualquier configuración anterior de Worker a estática. No volver a publicar una versión antigua.
 
-El acceso de desarrollo simulado solo existe en localhost. La autenticación de producción actual espera cabeceras verificadas por Sites y sus rutas de inicio de sesión. Un VPS no proporciona ese servicio automáticamente. No se debe publicar el panel confiando en cabeceras enviadas por el visitante.
+Páginas físicas generadas:
 
-## Comprobar el código en Linux
+- dist/index.html: portada y catálogo.
+- dist/soluciones/index.html: presentación, conserva los enlaces anteriores.
+- dist/panel/index.html: catálogo y fichas.
+- dist/assets/: CSS y JavaScript compilados.
+- dist/images/cardnet/: las 13 imágenes originales.
 
-Requiere Node 22.13 o superior y las dependencias de desarrollo para construir.
+El servidor debe resolver los directorios con su index.html y conservar los parámetros (por ejemplo /panel/?solucion=school). No necesita API, Cloudflare, D1 ni proceso Node en ejecución. Publicar solo dist, sin node_modules, código fuente, archivos de entorno ni bases locales. Conservar solo dist en cada versión reduce el espacio utilizado.
+
+## Alternativa Docker en el VPS
 
 ```sh
 git clone https://github.com/diclar747/cardnet.git
 cd cardnet
-npm run install:ci
-node node_modules/typescript/bin/tsc --noEmit
-npm run build
+docker compose up -d --build
+curl -I http://127.0.0.1:8086/
+curl -I http://127.0.0.1:8086/soluciones/
+curl -I http://127.0.0.1:8086/panel/
 ```
 
-Para evaluación aislada en el propio servidor, `npm start -- --port 8787` inicia la vista previa sobre 127.0.0.1. No exponerla como panel de producción. No copiar la base de datos de la computadora de desarrollo.
+El contenedor final sirve únicamente dist mediante Nginx, sin Node ni node_modules. El puerto 8086 está vinculado a loopback: configurar el proxy HTTPS existente de cardnet.cd.com.py hacia http://127.0.0.1:8086. Si el puerto ya está ocupado, elegir otro libre en Compose y ajustar el proxy. No sobrescribir otros dominios. Las imágenes Docker requieren acceso a Docker Hub. Esta alternativa necesita verificación en el VPS: Docker no estaba instalado en la computadora de desarrollo.
 
-## Trabajo requerido para producción en el VPS
+## Verificación local
 
-1. Adaptar la ejecución de Workers y el acceso D1 a un entorno de servidor soportado (por ejemplo Node y PostgreSQL), o mantener el backend en un proveedor compatible con Workers/D1.
-2. Implementar autenticación y sesiones propias, permisos por organización y validación del origen de identidad; reemplazar las rutas de autenticación de Sites.
-3. Preparar Dockerfile y Compose para el runtime definitivo, migraciones de base de datos, volumen persistente y copias de seguridad. No usar un servidor de desarrollo como proceso de producción.
-4. Configurar proxy inverso, HTTPS y DNS de cd.com.py, sin sobrescribir un sitio existente. Comprobar rutas, imágenes, inicio de sesión, permisos y persistencia tras reiniciar.
+```sh
+npm run install:ci
+npm run build
+node scripts/check-static.mjs
+npm run preview:static
+```
 
-Estos cambios y el despliegue real todavía no se han realizado. No se han recibido ni guardado credenciales del VPS.
+Abrir http://127.0.0.1:5187. Comprobar portada, /soluciones/, /panel/?solucion=school, imágenes, búsqueda, seis colores y ambos modos. Tras publicar, repetir en HTTPS y verificar que CSS/JS respondan con sus tipos correctos.
 
-## Archivos excluidos
+## Alcance
 
-Git excluye `node_modules`, compilaciones, `.env*`, `.dev.vars*`, claves PEM, `.wrangler`, `.sites-runtime`, capturas y temporales en `work`. Se incluyen las migraciones de esquema, sin registros personales. El PDF original no forma parte del repositorio.
+Se publican presentación, catálogo de 37 soluciones, fichas, búsqueda y personalización. Los módulos mantienen sus estados de desarrollo.
+
+La gestión persistente de empresas, solicitudes, usuarios y actividad **no está habilitada en la salida estática**: necesita backend, autenticación y base de datos. No se simulan registros guardados ni sesión. El código anterior se conserva: npm run dev abre el entorno local completo; npm run build:worker construye Workers/D1 y npm run start:worker permite probar esa compilación. Ambas variantes usan dist: para publicar HTML ejecutar siempre npm run build al final.
+
+La autenticación del backend anterior depende de Sites y requiere reemplazo antes de alojarlo en un VPS. La publicación estática no usa esa autenticación ni confía en cabeceras de identidad.

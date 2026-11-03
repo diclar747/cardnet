@@ -2,9 +2,11 @@
 
 Presentación corporativa, catálogo de 37 soluciones y primera base de administración de empresas y solicitudes. Incluye imágenes originales, seis paletas y modos claro/oscuro. Ver [PROJECT.md](PROJECT.md), [REQUIREMENTS.md](REQUIREMENTS.md) y [DEPLOYMENT.md](DEPLOYMENT.md).
 
-**Servidor propio:** esta versión utiliza Workers/D1 y autenticación de Sites. El despliegue de producción en el VPS Linux/Docker de cd.com.py requiere la adaptación descrita en DEPLOYMENT.md.
+**Publicación estática:** `npm run build` genera `dist/index.html` y todos los archivos para publicar en `cardnet.cd.com.py`. En «Despliegue Git» configurar salida **`dist`**, tipo **estático**. Ver [DEPLOYMENT.md](DEPLOYMENT.md) para los valores completos y Docker/Nginx. Esta salida presenta el catálogo; las operaciones con base de datos necesitan backend y no se habilitan en la versión estática.
 
-## Base técnica
+## Backend conservado y notas del starter
+
+Las siguientes notas describen la variante Workers/D1 conservada. Sus comandos son ahora `npm run build:worker` y `npm run start:worker`. Para la publicación estática, seguir DEPLOYMENT.md.
 
 A clean full-stack starter running on [vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and Drizzle support.
 
