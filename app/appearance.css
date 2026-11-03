@@ -1,4 +1,7 @@
 :root{color-scheme:light}
+.whatsapp-launcher{position:fixed;right:24px;bottom:84px;z-index:45;width:49px;height:49px;display:grid;place-items:center;border-radius:50%;background:#14833f;color:#fff;box-shadow:0 4px 20px #0003;border:1px solid #ffffff40}
+.whatsapp-launcher:hover{background:#106d34;transform:translateY(-2px)}
+@media(max-width:600px){.whatsapp-launcher{right:15px;bottom:73px}}
 .mode-options{border:0;padding:0;margin:0 0 24px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .mode-options legend{font-size:11px;margin-bottom:12px}
 .mode-options label{display:flex;align-items:center;gap:9px;border:1px solid var(--line);border-radius:9px;padding:13px 10px;font-size:12px;cursor:pointer}
