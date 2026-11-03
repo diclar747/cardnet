@@ -1,4 +1,5 @@
 :root{color-scheme:light}
+:root{--floating-bottom:calc(23px + env(safe-area-inset-bottom,0px))}
 .whatsapp-launcher{position:fixed;right:24px;bottom:86px;z-index:45;width:52px;height:52px;display:grid;place-items:center;border-radius:18px;background:linear-gradient(145deg,#35d58a,#139d61 58%,#087b4b);color:#fff;border:1px solid #b5ffda80;box-shadow:inset 0 1px 1px #ffffff66,0 7px 18px #052c3166,0 2px 5px #0003;isolation:isolate;transition:transform .25s,box-shadow .25s}
 .whatsapp-launcher:before{content:'';position:absolute;inset:-5px;border:1px solid #63e6a64d;border-radius:23px;box-shadow:0 0 20px #25d38666;z-index:-1;pointer-events:none;animation:whatsapp-glow 3.2s ease-in-out infinite}
 .whatsapp-launcher svg{width:25px;height:25px;filter:drop-shadow(0 1px 2px #00613955)}
@@ -28,3 +29,9 @@
 :root[data-mode="dark"] .theme-launcher:hover{background:#213447}
 :root[data-mode="dark"] .cs-product-copy p{color:#a8b8c7}
 :root[data-mode="dark"] .filters button.selected{background:var(--accent);color:white}
+/* Shared action column: installation, WhatsApp, appearance. */
+.theme-launcher,.whatsapp-launcher{left:auto;right:24px;width:52px;height:52px;border-radius:18px;padding:0;display:grid;place-items:center}
+.theme-launcher{bottom:var(--floating-bottom)}
+.whatsapp-launcher{bottom:calc(var(--floating-bottom) + 62px)}
+.theme-launcher>span{display:none}.theme-launcher>svg{width:22px;height:22px}
+@media(max-width:600px){:root{--floating-bottom:calc(15px + env(safe-area-inset-bottom,0px))}.theme-launcher,.whatsapp-launcher{right:15px}}

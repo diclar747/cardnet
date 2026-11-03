@@ -8,7 +8,7 @@ Página de instalación: https://cardnet.cd.com.py/instalar/.
 - iPhone: abrir en Safari, Compartir → Agregar a pantalla de inicio. Activar «Abrir como app web» si se ofrece.
 - Computadora: Chrome o Edge pueden ofrecer el ícono de instalación en la barra de direcciones.
 
-La apariencia del diálogo y de la pantalla de arranque del sistema operativo depende del dispositivo. El manifiesto define nombre CARDNET, logo original, fondo oscuro, modo standalone, accesos al catálogo y captura móvil. La aplicación incorpora una breve bienvenida fotográfica al iniciarse en modo standalone. No se distribuye un APK ni se publica en tiendas.
+La apariencia del diálogo y de la pantalla de arranque del sistema operativo depende del dispositivo. El manifiesto define nombre CARDNET, logo original, fondo oscuro, modo standalone, accesos al catálogo y captura móvil. La aplicación abre directamente el contenido, sin una bienvenida fotográfica superpuesta. No se distribuye un APK ni se publica en tiendas.
 
 ## Sin conexión
 
@@ -31,3 +31,9 @@ Las actualizaciones del worker esperan a que se cierren las ventanas anteriores 
 La instalación real y el arranque desde el ícono deben comprobarse en el teléfono del usuario; la revisión de escritorio no sustituye esa prueba.
 
 Referencias: https://web.dev/learn/pwa/web-app-manifest y https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Guides/Making_PWAs_installable.
+
+## Ajuste de botones y apertura
+
+Se eliminó la bienvenida fotográfica superpuesta. Instalación, WhatsApp y Temas comparten una columna a la derecha y el mismo tamaño. El botón de instalación desaparece dentro del modo standalone y al recibirse appinstalled; el navegador recuerda la instalación. Cuando está disponible, se consulta getInstalledRelatedApps. Un nuevo beforeinstallprompt permite volver a ofrecerla tras desinstalar. Si un navegador no informa su estado, el usuario puede usar Ya la tengo instalada para ocultarlo. No existe detección universal entre todos los navegadores y dispositivos.
+
+

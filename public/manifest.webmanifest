@@ -63,5 +63,12 @@
       "src": "/pwa/screenshot-phone.jpg",
       "label": "CARDNET: portada corporativa y acceso al catálogo"
     }
+  ],
+  "related_applications": [
+    {
+      "id": "https://cardnet.cd.com.py/",
+      "url": "https://cardnet.cd.com.py/manifest.webmanifest",
+      "platform": "webapp"
+    }
   ]
 }

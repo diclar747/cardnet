@@ -4,8 +4,17 @@ import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import vm from 'node:vm';
 import sharp from 'sharp';
+import ts from 'typescript';
 
 const root = fileURLToPath(new URL('../dist/', import.meta.url));
+const installSource = await readFile(new URL('../lib/pwa-install.ts', import.meta.url), 'utf8');
+const compiled = ts.transpileModule(installSource, { compilerOptions: { module: ts.ModuleKind.ESNext } }).outputText;
+const { isCardnetInstalled } = await import(`data:text/javascript;base64,${Buffer.from(compiled).toString('base64')}`);
+assert.equal(isCardnetInstalled(true, false), true);
+assert.equal(isCardnetInstalled(false, true), true);
+assert.equal(isCardnetInstalled(false, false), false);
+assert.equal(isCardnetInstalled(false, false, [{ platform: 'webapp', url: 'https://cardnet.test/manifest.webmanifest' }], 'https://cardnet.test'), true);
+assert.equal(isCardnetInstalled(false, false, [{ platform: 'webapp', url: 'https://other.test/manifest.webmanifest' }], 'https://cardnet.test'), false);
 const manifest = JSON.parse(await readFile(path.join(root, 'manifest.webmanifest'), 'utf8'));
 assert.equal(manifest.display, 'standalone');
 assert.equal(manifest.short_name, 'CARDNET');
