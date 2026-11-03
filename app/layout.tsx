@@ -10,8 +10,8 @@ export const metadata: Metadata = {
   title: "CARDNET | Centro de operaciones",
   description: "Un ecosistema conectado para administrar servicios, empresas y operaciones.",
   icons: {
-    icon: "/favicon.svg",
-    shortcut: "/favicon.svg",
+    icon: "/favicon.svg?v=celeste",
+    shortcut: "/favicon.svg?v=celeste",
   },
 };
 
@@ -27,3 +27,4 @@ export default function RootLayout({
     </html>
   );
 }
+

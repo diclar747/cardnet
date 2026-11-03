@@ -26,7 +26,7 @@ try {
 
 const assets = (await readdir(path.join(root, 'dist/assets'))).map(name => `/assets/${name}`);
 const photos = (await readdir(path.join(root, 'dist/pwa/photos'))).map(name => `/pwa/photos/${name}`);
-const precache = ['/', '/soluciones/', '/panel/', '/instalar/', '/offline.html', '/manifest.webmanifest', '/pwa/icon-192.png', '/pwa/icon-512.png', '/pwa/cover.webp', ...photos, ...assets];
+const precache = ['/', '/soluciones/', '/panel/', '/instalar/', '/offline.html', '/manifest.webmanifest', '/pwa/icon-192-blue.png', '/pwa/icon-512-blue.png', '/pwa/cover.webp', ...photos, ...assets];
 const versionHash = createHash('sha256');
 for (const url of precache) {
   const file = url.endsWith('/') ? `${url}index.html` : url;
@@ -42,3 +42,4 @@ for (const entry of ['index.html', 'assets', 'images', 'panel', 'soluciones', 'i
   await cp(path.join(root, 'dist', entry), path.join(root, entry), { recursive: true });
 }
 console.log('Compatibilidad de hosting: HTML y recursos compilados preparados también en la raíz.');
+

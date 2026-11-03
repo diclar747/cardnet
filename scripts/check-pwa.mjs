@@ -55,7 +55,8 @@ async function offline(url, mode) {
 assert.match(await (await offline('/panel/?solucion=school', 'navigate')).text(), /Explorá nuestras soluciones/);
 assert.match(await (await offline('/ruta-no-guardada/', 'navigate')).text(), /Volvemos a conectar/);
 assert.ok((await (await offline('/images/cardnet/hero.png', 'cors')).arrayBuffer()).byteLength > 1000);
-assert.ok((await stat(path.join(root, 'pwa/icon-180.png'))).size > 0);
+assert.ok((await stat(path.join(root, 'pwa/icon-180-blue.png'))).size > 0);
 console.log(`PWA correcta: manifest, íconos, ${cacheStore.size} archivos precargados, catálogo sin conexión, fallback y foto corporativa sin conexión.`);
 // The isolated Response clones can retain undici MessagePorts after assertions.
 process.exit(0);
+
