@@ -3,6 +3,7 @@ import { ArrowLeft, ArrowUpRight, X } from 'lucide-react';
 import Solutions from '../app/soluciones/page';
 import SolutionCatalog from '../app/soluciones/catalog';
 import ThemePicker from '../app/theme-picker';
+import Pwa from '../app/pwa';
 import { modules, type Module } from '../lib/catalog';
 import { mediaForModule } from '../lib/media';
 
@@ -27,5 +28,5 @@ function CatalogPanel() {
 }
 
 export default function StaticApp({ path = '/' }: { path?: string }) {
-  return <>{path.startsWith('/panel') ? <CatalogPanel/> : <Solutions panelHref={panelHref} staticMode/>}<ThemePicker/></>;
+  return <>{path.startsWith('/instalar') ? <Pwa installationPage/> : <>{path.startsWith('/panel') ? <CatalogPanel/> : <Solutions panelHref={panelHref} staticMode/>}<Pwa/></>}<ThemePicker/></>;
 }

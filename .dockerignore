@@ -14,4 +14,9 @@ assets
 images
 panel
 soluciones
+pwa
+instalar
+sw.js
+manifest.webmanifest
+offline.html
 *.tsbuildinfo

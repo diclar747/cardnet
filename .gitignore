@@ -50,3 +50,8 @@ yarn-error.log*
 /panel/
 /soluciones/
 /favicon.svg
+/pwa/
+/instalar/
+/manifest.webmanifest
+/sw.js
+/offline.html

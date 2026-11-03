@@ -5,5 +5,6 @@ import '../app/palettes.css';
 import '../app/corporate.css';
 import '../app/appearance.css';
 import './static.css';
+import '../app/pwa.css';
 
 hydrateRoot(document.getElementById('root')!, <StaticApp path={window.location.pathname}/>);

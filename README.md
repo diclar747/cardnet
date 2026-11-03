@@ -6,6 +6,8 @@ Presentación corporativa, catálogo de 37 soluciones y primera base de administ
 
 ## Backend conservado y notas del starter
 
+**Aplicación instalable:** abrir `/instalar/` o el botón «Instalar app». Incluye logo, portada y catálogo sin conexión tras la primera carga completa. Instrucciones y comprobaciones en [PWA.md](PWA.md).
+
 Las siguientes notas describen la variante Workers/D1 conservada. Sus comandos son ahora `npm run build:worker` y `npm run start:worker`. Para la publicación estática, seguir DEPLOYMENT.md.
 
 A clean full-stack starter running on [vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and Drizzle support.
