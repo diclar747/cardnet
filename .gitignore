@@ -43,3 +43,10 @@ yarn-error.log*
 
 # OS metadata
 .DS_Store
+
+# Static files staged at checkout root by build-static for Git hosting panels
+/assets/
+/images/
+/panel/
+/soluciones/
+/favicon.svg

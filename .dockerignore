@@ -10,4 +10,8 @@ dist
 .next
 work
 outputs
+assets
+images
+panel
+soluciones
 *.tsbuildinfo

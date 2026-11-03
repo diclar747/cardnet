@@ -60,3 +60,10 @@ Se publican presentación, catálogo de 37 soluciones, fichas, búsqueda y perso
 La gestión persistente de empresas, solicitudes, usuarios y actividad **no está habilitada en la salida estática**: necesita backend, autenticación y base de datos. No se simulan registros guardados ni sesión. El código anterior se conserva: npm run dev abre el entorno local completo; npm run build:worker construye Workers/D1 y npm run start:worker permite probar esa compilación. Ambas variantes usan dist: para publicar HTML ejecutar siempre npm run build al final.
 
 La autenticación del backend anterior depende de Sites y requiere reemplazo antes de alojarlo en un VPS. La publicación estática no usa esa autenticación ni confía en cabeceras de identidad.
+
+## Compatibilidad comprobada con el panel cd.com.py
+
+El panel actual publica la raíz completa del checkout incluso cuando existe dist. Por compatibilidad, npm run build deja también el HTML compilado y sus recursos en esa raíz. La plantilla fuente se conserva en static/index.template.html para que las compilaciones repetidas sean seguras. Los directorios generados se excluyen de Git. dist sigue siendo el artefacto recomendado para servidores que permitan elegir la salida.
+
+Si después de un despliegue exitoso persiste un 404, usar Recrear en el sitio para volver a montar la carpeta actual: se observó que el contenedor retenía la carpeta anterior tras el cambio de versión. No borrar versiones para resolver ese síntoma.
+
