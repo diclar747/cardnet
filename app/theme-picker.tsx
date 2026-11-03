@@ -3,11 +3,11 @@
 import { useEffect, useRef, useState } from 'react';
 import { Check, Moon, Sun, Palette, RotateCcw, X } from 'lucide-react';
 
-import { themes, themeStorageKey as storageKey, modeStorageKey } from '../lib/themes';
+import { themes, themeStorageKey as storageKey, modeStorageKey, defaultTheme, defaultMode } from '../lib/themes';
 
 export default function ThemePicker() {
-  const [selected, setSelected] = useState('cardnet');
-  const [mode, setMode] = useState('light');
+  const [selected, setSelected] = useState(defaultTheme);
+  const [mode, setMode] = useState(defaultMode);
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState('');
   const dialog = useRef<HTMLDialogElement>(null);
@@ -16,13 +16,13 @@ export default function ThemePicker() {
   useEffect(() => {
     const sync = () => {
       let saved = document.documentElement.dataset.theme;
-      try { saved = localStorage.getItem(storageKey) || 'cardnet'; } catch { /* Keep the session preference. */ }
-      const id = themes.some(t => t.id === saved) ? saved! : 'cardnet';
+      try { saved = localStorage.getItem(storageKey) || defaultTheme; } catch { /* Keep the session preference. */ }
+      const id = themes.some(t => t.id === saved) ? saved! : defaultTheme;
       document.documentElement.dataset.theme = id;
       setSelected(id);
-      let savedMode = document.documentElement.dataset.mode || 'light';
-      try { savedMode = localStorage.getItem(modeStorageKey) || 'light'; } catch { /* Keep session preference. */ }
-      const nextMode = savedMode === 'dark' ? 'dark' : 'light';
+      let savedMode = document.documentElement.dataset.mode || defaultMode;
+      try { savedMode = localStorage.getItem(modeStorageKey) || defaultMode; } catch { /* Keep session preference. */ }
+      const nextMode = savedMode === 'light' ? 'light' : defaultMode;
       document.documentElement.dataset.mode = nextMode;
       setMode(nextMode);
     };
@@ -71,8 +71,9 @@ export default function ThemePicker() {
         <strong>{theme.name}</strong><small>{theme.description}</small>
       </label>)}</fieldset>
       <p className="theme-save-status" role="status">{message || 'Tu elección se recuerda al volver a abrir el sistema.'}</p>
-      <div className="theme-dialog-actions"><button className="secondary" onClick={() => { choose('cardnet'); chooseMode('light'); }}><RotateCcw size={14} />Restablecer</button><button className="primary" onClick={() => setOpen(false)}>Listo <Check size={16} /></button></div>
+      <div className="theme-dialog-actions"><button className="secondary" onClick={() => { choose(defaultTheme); chooseMode(defaultMode); }}><RotateCcw size={14} />Restablecer</button><button className="primary" onClick={() => setOpen(false)}>Listo <Check size={16} /></button></div>
     </dialog>
   </>;
 }
+
 

@@ -8,4 +8,6 @@ export const themes = [
 ];
 export const themeStorageKey = 'cardnet.theme.v1';
 export const modeStorageKey = 'cardnet.mode.v1';
-export const themeInitialization = `(()=>{try{const v=localStorage.getItem('${themeStorageKey}');if(${JSON.stringify(themes.map(t=>t.id))}.includes(v))document.documentElement.dataset.theme=v;document.documentElement.dataset.mode=localStorage.getItem('${modeStorageKey}')==='dark'?'dark':'light'}catch{}})();`;
+export const defaultTheme = 'ocean';
+export const defaultMode = 'dark';
+export const themeInitialization = `(()=>{const d=document.documentElement;d.dataset.theme='${defaultTheme}';d.dataset.mode='${defaultMode}';try{const v=localStorage.getItem('${themeStorageKey}');if(${JSON.stringify(themes.map(t=>t.id))}.includes(v))d.dataset.theme=v;const m=localStorage.getItem('${modeStorageKey}');if(m==='dark'||m==='light')d.dataset.mode=m}catch{}})();`;
