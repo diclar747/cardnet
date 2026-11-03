@@ -8,7 +8,7 @@ Página de instalación: https://cardnet.cd.com.py/instalar/.
 - iPhone: abrir en Safari, Compartir → Agregar a pantalla de inicio. Activar «Abrir como app web» si se ofrece.
 - Computadora: Chrome o Edge pueden ofrecer el ícono de instalación en la barra de direcciones.
 
-La apariencia del diálogo y de la pantalla de arranque del sistema operativo depende del dispositivo. El manifiesto define nombre CARDNET, logo original, fondo oscuro, modo standalone, accesos al catálogo y captura móvil. La aplicación abre directamente el contenido, sin una bienvenida fotográfica superpuesta. No se distribuye un APK ni se publica en tiendas.
+La apariencia del diálogo y de la pantalla de arranque del sistema operativo depende del dispositivo. El manifiesto define nombre CARDNET, logo original, fondo oscuro, modo standalone, accesos al catálogo y captura móvil. La aplicación muestra una breve bienvenida fotográfica con el logo celeste al abrirse en modo standalone. No se distribuye un APK ni se publica en tiendas.
 
 ## Sin conexión
 
@@ -34,6 +34,10 @@ Referencias: https://web.dev/learn/pwa/web-app-manifest y https://developer.mozi
 
 ## Ajuste de botones y apertura
 
-Se eliminó la bienvenida fotográfica superpuesta. Instalación, WhatsApp y Temas comparten una columna a la derecha y el mismo tamaño. El botón de instalación desaparece dentro del modo standalone y al recibirse appinstalled; el navegador recuerda la instalación. Cuando está disponible, se consulta getInstalledRelatedApps. Un nuevo beforeinstallprompt permite volver a ofrecerla tras desinstalar. Si un navegador no informa su estado, el usuario puede usar Ya la tengo instalada para ocultarlo. No existe detección universal entre todos los navegadores y dispositivos.
+Se restauró la bienvenida fotográfica con el logo celeste. Instalación, WhatsApp y Temas comparten una columna a la derecha y el mismo tamaño. El botón de instalación desaparece dentro del modo standalone y al recibirse appinstalled; el navegador recuerda la instalación. Cuando está disponible, se consulta getInstalledRelatedApps. Un nuevo beforeinstallprompt permite volver a ofrecerla tras desinstalar. Si un navegador no informa su estado, el usuario puede usar Ya la tengo instalada para ocultarlo. No existe detección universal entre todos los navegadores y dispositivos.
+
+
+
+La bienvenida fotográfica fue restaurada a pedido del usuario: se muestra al arrancar en modo standalone durante 1,8 segundos, con el logo celeste. Es distinta de la pantalla nativa de Android previa a cargar la web; esa pantalla e ícono dependen del sistema y de la actualización de la instalación.
 
 
