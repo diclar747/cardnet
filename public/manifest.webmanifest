@@ -4,7 +4,7 @@
   "short_name": "CARDNET",
   "description": "Cloud, inteligencia artificial, accesos y soluciones tecnológicas. El ecosistema CARDNET en tu teléfono.",
   "lang": "es-PY",
-  "start_url": "/?origen=pwa",
+  "start_url": "/panel/?origen=pwa",
   "scope": "/",
   "display": "standalone",
   "background_color": "#0d1825",
@@ -72,4 +72,3 @@
     }
   ]
 }
-

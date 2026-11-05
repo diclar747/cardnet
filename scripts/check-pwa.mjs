@@ -52,7 +52,7 @@ async function offline(url, mode) {
   assert.ok(response);
   return await response;
 }
-assert.match(await (await offline('/panel/?solucion=school', 'navigate')).text(), /Explorá nuestras soluciones/);
+assert.match(await (await offline('/panel/?solucion=school', 'navigate')).text(), /Encontrá lo que te conecta/);
 assert.match(await (await offline('/ruta-no-guardada/', 'navigate')).text(), /Volvemos a conectar/);
 assert.ok((await (await offline('/images/cardnet/hero.png', 'cors')).arrayBuffer()).byteLength > 1000);
 assert.ok((await stat(path.join(root, 'pwa/icon-180-blue.png'))).size > 0);

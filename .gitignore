@@ -55,3 +55,6 @@ yarn-error.log*
 /manifest.webmanifest
 /sw.js
 /offline.html
+
+# Generated static route entry points
+/*/index.html
